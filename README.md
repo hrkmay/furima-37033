@@ -21,9 +21,11 @@ has_many :records
 | -------------------| ------------ |------------------------------  |
 | items_name         | string       | null: false                    | 
 | info               | text         | null: false                    |
-| category           | string       | null: false                    |
-| condition          | string       | null: false                    |
-| place              | string       | null: false                    |
+| category_id        | integer      | null: false                    |
+| condition_id       | integer      | null: false                    |
+| place_id           | integer      | null: false                    |
+| shipping_price_id  | integer      | null: false                    |
+| day_to_ship_id     | integer      | null: false                    |
 | seller_name        | string       | null: false                    |
 | price              | integer      | null: false                    |
 | user               | references   | null: false, foreign_key: true |
@@ -32,9 +34,11 @@ has_many :records
 ### Association
 belongs_to :user
 has_one :record
-belongs_to_active_hash :category
-belongs_to_active_hash :condition
-belongs_to_active_hash :place
+belongs_to_active_hash :category_id
+belongs_to_active_hash :condition_id
+belongs_to_active_hash :place_id
+belongs_to_active_hash :shipping_price_id
+belongs_to_active_hash :day_to_ship_id
 
 
 ##records テーブル
@@ -48,20 +52,20 @@ belongs_to_active_hash :place
 
 
 ### Association
-belongs_to :items
+belongs_to :item
 has_one :address
 
 ##addresses テーブル
 | Column             | Type         | Option                         |
 | -------------------| ------------ |------------------------------  |
 | postal_code        | string       | null: false                    |
-| prefecture         | string       | null: false                    |
+| place_id           | integer      | null: false                    |
 | city               | string       | null: false                    |
 | house_number       | string       | null: false                    |
-| building_name      | string       | null: false                    |
+| building_name      | string       |                                |
 | phone_number       | string       | null: false                    |
 | record             | references   | null: false, foreign_key: true |
 
 ### Association
 belongs_to :record
-belongs_to_active_hash :prefecture
+belongs_to_active_hash :place_id
