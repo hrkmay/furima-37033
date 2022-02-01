@@ -1,5 +1,4 @@
 ##users テーブル
-
 | Column             | Type         | Option                    |
 | -------------------| ------------ |-------------------------  |
 | nickname           | string       | null: false               |
@@ -15,8 +14,8 @@
 has_many :items
 has_many :records
 
-##items テーブル
 
+##items テーブル
 | Column             | Type         | Option                         |
 | -------------------| ------------ |------------------------------  |
 | items_name         | string       | null: false                    | 
@@ -41,19 +40,16 @@ belongs_to_active_hash :day_to_ship_id
 
 
 ##records テーブル
-
 | Column             | Type         | Option                         |
 | -------------------| ------------ |------------------------------  |
 | user               | references   | null: false, foreign_key: true |
 | item               | references   | null: false, foreign_key: true |
 
-
-
-
 ### Association
 belongs_to :item
 has_one :address
-has_one :user
+belongs_to :user
+
 
 ##addresses テーブル
 | Column             | Type         | Option                         |
