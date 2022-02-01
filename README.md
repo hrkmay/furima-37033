@@ -26,7 +26,6 @@ has_many :records
 | place_id           | integer      | null: false                    |
 | shipping_price_id  | integer      | null: false                    |
 | day_to_ship_id     | integer      | null: false                    |
-| seller_name        | string       | null: false                    |
 | price              | integer      | null: false                    |
 | user               | references   | null: false, foreign_key: true |
 
@@ -54,6 +53,7 @@ belongs_to_active_hash :day_to_ship_id
 ### Association
 belongs_to :item
 has_one :address
+has_one :user
 
 ##addresses テーブル
 | Column             | Type         | Option                         |
