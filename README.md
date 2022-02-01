@@ -20,26 +20,27 @@ has_many :records
 | Column             | Type         | Option                         |
 | -------------------| ------------ |------------------------------  |
 | items_name         | string       | null: false                    | 
-| image              | string       | null: false                    |
 | info               | text         | null: false                    |
 | category           | string       | null: false                    |
 | condition          | string       | null: false                    |
 | place              | string       | null: false                    |
 | seller_name        | string       | null: false                    |
-| price              | string       | null: false                    |
+| price              | integer      | null: false                    |
 | user               | references   | null: false, foreign_key: true |
 
 
 ### Association
 belongs_to :user
-belongs_to :record
+has_one :record
+belongs_to_active_hash :category
+belongs_to_active_hash :condition
+belongs_to_active_hash :place
 
-##record テーブル
+
+##records テーブル
 
 | Column             | Type         | Option                         |
 | -------------------| ------------ |------------------------------  |
-| customers_name     | string       | null: false               　　　|
-| count              | integer      | null: false               　　　|
 | user               | references   | null: false, foreign_key: true |
 | item               | references   | null: false, foreign_key: true |
 
@@ -48,18 +49,19 @@ belongs_to :record
 
 ### Association
 belongs_to :items
-belongs_to :address
+has_one :address
 
-##address テーブル
-| Column             | Type         | Option                    |
-| -------------------| ------------ |-------------------------  |
-| post_number        | string       | null: false               |
-| prefecture         | string       | null: false               |
-| city               | text         | null: false               |
-| address            | text         | null: false               |
-| build_name         | text         | null: false               |
-| phone_number       | text         | null: false               |
-
+##addresses テーブル
+| Column             | Type         | Option                         |
+| -------------------| ------------ |------------------------------  |
+| postal_code        | string       | null: false                    |
+| prefecture         | string       | null: false                    |
+| city               | string       | null: false                    |
+| house_number       | string       | null: false                    |
+| building_name      | string       | null: false                    |
+| phone_number       | string       | null: false                    |
+| record             | references   | null: false, foreign_key: true |
 
 ### Association
 belongs_to :record
+belongs_to_active_hash :prefecture
