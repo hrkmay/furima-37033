@@ -8,8 +8,6 @@ FactoryBot.define do
     first_kana_name       {"ケイ"}
     last_kana_name        {"ナカムラ"}
     birth                 {Faker::Date.between(from: '1930-01-01', to: '2015-12-31')}
-    created_at            {"2022-01-26 08:18:50.867118"}
-    updated_at            {"2022-01-26 08:30:50.867118"}
     password_confirmation {password}
   end
 end
