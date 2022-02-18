@@ -1,4 +1,8 @@
-class User < ApplicationRecord
+class ApplicationRecord < ActiveRecord::Base
+  self.abstract_class = true
+end
+
+class User < ApplicationRecord 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -12,4 +16,6 @@ class User < ApplicationRecord
          validates :first_kana_name,    presence: true, format: {with: /\A[ァ-ヶー－]+\z/ }
          validates :last_kana_name,     presence: true, format: {with: /\A[ァ-ヶー－]+\z/ }
          validates :birth,              presence: true
+
+         has_many :items
 end
