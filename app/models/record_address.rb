@@ -8,8 +8,8 @@ class RecordAddress
    validates :city
    validates :house_number
    validates :phone_number, length: { minimum: 10, maximum: 11 }, format: {with: /\A[0-9]+\z/ }
-   validates :user, foreign_key: true
-   validates :item, foreign_key: true
+   validates :user
+   validates :item
   end
    validates :building_name
 
