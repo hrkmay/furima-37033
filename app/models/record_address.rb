@@ -6,12 +6,12 @@ class RecordAddress
    validates :postial_code
    validates :place_id
    validates :city
-   validates :house_number
+   validates :house_number, format: {with: /\A[0-9]{3}-[0-9]{4}\z/}
    validates :phone_number, length: { minimum: 10, maximum: 11 }, format: {with: /\A[0-9]+\z/ }
    validates :user
    validates :item
   end
-   validates :building_name
+   validate :building_name
 
    def save
     record = Record.create(user: user, item: item)
