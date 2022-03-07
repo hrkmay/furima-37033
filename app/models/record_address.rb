@@ -10,8 +10,8 @@ class RecordAddress
    validates :phone_number, length: { minimum: 10, maximum: 11 }, format: {with: /\A[0-9]+\z/ }
    validates :user_id
    validates :item_id
-   
   end
+
    validate :building_name
 
    def save
@@ -20,3 +20,4 @@ class RecordAddress
                              phone_number: phone_number, building_name: building_name, record_id: record.id)
    end
 end
+
