@@ -6,11 +6,11 @@ class RecordsController < ApplicationController
 
   def create
     @record_address = RecordAddress.new(record_params)
-    if 
+    if @record_address.valid?
       @record_address.save
       redirect_to root_path
     else
-      render :new
+      render :index
     end
   end
 
