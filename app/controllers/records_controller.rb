@@ -7,6 +7,7 @@ class RecordsController < ApplicationController
   end
 
   def create
+    @item = Item.find(params[:item_id])
     @record_address = RecordAddress.new(record_params)
     if @record_address.valid?
       Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
