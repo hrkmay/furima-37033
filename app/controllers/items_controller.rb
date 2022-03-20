@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :set_item, except: [:index, :new, :create]
   before_action :authenticate_user!, only: [:new, :edit, :destory]
   before_action :move_to_index, only: [:edit, :destory]
-  
+  before_action :move_to_top, only: [:edit, :destory]
   def index
     @items = Item.order("created_at DESC")
 
@@ -56,6 +56,12 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def move_to_top
+    if @item.record.present?
+      redirect_to root_path
+    end
   end
 
 end
