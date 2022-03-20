@@ -25,7 +25,7 @@ RSpec.describe RecordAddress, type: :model do
     end
 
     context '内容に問題がある場合' do
-      it "tokenが空では登録できないこと" do
+      it 'tokenが空では登録できないこと' do
         @record_address.token = ''
         @record_address.valid?
         expect(@record_address.errors.full_messages).to include("Token can't be blank")
@@ -40,7 +40,7 @@ RSpec.describe RecordAddress, type: :model do
       it 'postial_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
         @record_address.postial_code = '1234567'
         @record_address.valid?
-        expect(@record_address.errors.full_messages).to include("Postial code is invalid")
+        expect(@record_address.errors.full_messages).to include('Postial code is invalid')
       end
 
       it 'place_idが空だと保存できないこと' do
@@ -70,19 +70,19 @@ RSpec.describe RecordAddress, type: :model do
       it 'phone_numberが短すぎると保存できないこと' do
         @record_address.phone_number = '1'
         @record_address.valid?
-        expect(@record_address.errors.full_messages).to include("Phone number is too short (minimum is 10 characters)")
+        expect(@record_address.errors.full_messages).to include('Phone number is too short (minimum is 10 characters)')
       end
 
       it 'phone_numberが半角数字のみの正しい形式でないと保存できないこと' do
         @record_address.phone_number = '123あああ'
         @record_address.valid?
-        expect(@record_address.errors.full_messages).to include("Phone number is invalid")
+        expect(@record_address.errors.full_messages).to include('Phone number is invalid')
       end
 
       it 'phone_numberが12桁以上の場合は登録できない' do
         @record_address.phone_number = '1234567890123'
         @record_address.valid?
-        expect(@record_address.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+        expect(@record_address.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
       end
 
       it 'userが紐付いていないと保存できないこと' do
@@ -96,7 +96,6 @@ RSpec.describe RecordAddress, type: :model do
         @record_address.valid?
         expect(@record_address.errors.full_messages).to include("Item can't be blank")
       end
-
     end
   end
 end

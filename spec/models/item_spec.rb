@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   before do
-    
     @item = FactoryBot.build(:item)
     @item.image = fixture_file_upload('public/image/a.png')
   end
@@ -11,13 +10,12 @@ RSpec.describe Item, type: :model do
     context '商品が出品できるとき' do
       it 'items_name,info,category_id,condition_id,shipping_price_id,place_id,day_tp_ship_id,priceが存在すれば出品できる' do
         @item.save
-        
+
         expect(@item).to be_valid
       end
     end
 
     context '商品が出品できないとき' do
-
       it 'imageが空では出品できない' do
         @item.image = nil
         @item.valid?
@@ -75,19 +73,19 @@ RSpec.describe Item, type: :model do
       it 'priceに半角数字以外が含まれている場合は出品できない' do
         @item.price = 'ああ'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
 
       it 'priceが300円未満の時は出品できない' do
         @item.price = 200
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than 300")
+        expect(@item.errors.full_messages).to include('Price must be greater than 300')
       end
 
       it 'priceが9_999_999円を超えると出品できない' do
-        @item.price = 100000000
+        @item.price = 100_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be less than 9999999")
+        expect(@item.errors.full_messages).to include('Price must be less than 9999999')
       end
 
       it 'userが紐付いていないと保存できない' do
@@ -95,7 +93,6 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('User must exist')
       end
-
     end
   end
 end

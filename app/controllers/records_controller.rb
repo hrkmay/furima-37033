@@ -9,7 +9,7 @@ class RecordsController < ApplicationController
   def create
     @record_address = RecordAddress.new(record_params)
     if @record_address.valid?
-      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+      Payjp.api_key = ENV['PAYJP_SECRET_KEY']
       Payjp::Charge.create(
         amount: @item.price,
         card: record_params[:token],
@@ -23,17 +23,18 @@ class RecordsController < ApplicationController
   end
 
   private
+
   def set_record
     @item = Item.find(params[:item_id])
   end
 
   def record_params
-    params.require(:record_address).permit(:building_name, :postial_code, :place_id, :city, :house_number, :phone_number).merge(token: params[:token], item_id: params[:item_id], user_id: current_user.id)
+    params.require(:record_address).permit(:building_name, :postial_code, :place_id, :city, :house_number, :phone_number).merge(
+      token: params[:token], item_id: params[:item_id], user_id: current_user.id
+    )
   end
 
   def move_to_index
-    if current_user.id == @item.user_id || @item.record != nil
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user.id == @item.user_id || !@item.record.nil?
   end
 end
