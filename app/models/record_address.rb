@@ -1,6 +1,6 @@
 class RecordAddress
   include ActiveModel::Model
-  attr_accessor :token, :user_id, :item_id, :postial_code, :place_id, :city, :house_number, :building_name, :phone_number, :record
+  attr_accessor :token, :user_id, :item_id, :postial_code, :place_id, :city, :house_number, :building_name, :phone_number
 
   with_options presence: true do
     validates :postial_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/ }
@@ -12,9 +12,7 @@ class RecordAddress
     validates :item_id
     validates :token
   end
-
-  validate :building_name
-
+  
   def save
     record = Record.create(user_id: user_id, item_id: item_id)
     Address.create(postial_code: postial_code, place_id: place_id, city: city, house_number: house_number,
