@@ -38,7 +38,7 @@ RSpec.describe RecordAddress, type: :model do
       end
 
       it 'postial_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
-        @record_address.postial_code = 'んああああ'
+        @record_address.postial_code = '1234567'
         @record_address.valid?
         expect(@record_address.errors.full_messages).to include("Postial code is invalid")
       end
@@ -79,10 +79,22 @@ RSpec.describe RecordAddress, type: :model do
         expect(@record_address.errors.full_messages).to include("Phone number is invalid")
       end
 
+      it 'phone_numberが12桁以上の場合は登録できない' do
+        @record_address.phone_number = '1234567890123'
+        @record_address.valid?
+        expect(@record_address.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+      end
+
       it 'userが紐付いていないと保存できないこと' do
         @record_address.user_id = nil
         @record_address.valid?
         expect(@record_address.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'itemが紐付いていないと保存できないこと' do
+        @record_address.item_id = nil
+        @record_address.valid?
+        expect(@record_address.errors.full_messages).to include("Item can't be blank")
       end
 
     end
