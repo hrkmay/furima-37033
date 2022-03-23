@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   validates :shipping_price_id,    presence: true
   validates :place_id,             presence: true
   validates :day_to_ship_id,       presence: true
-  validates :price, numericality: { greater_than: 300, less_than: 9_999_999, only_integer: true }, presence: true
+  validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, only_integer: true }, presence: true
 
   belongs_to :user
   has_one_attached :image
